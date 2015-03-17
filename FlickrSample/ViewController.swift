@@ -43,10 +43,12 @@ class ViewController: UIViewController,UISearchBarDelegate{
             "extras"         : "",
         ]
         let requestSuccess = {
-            (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
+            (operation:AFHTTPRequestOperation!, responseObject:AnyObject?) -> Void in
             let dict:NSDictionary = responseObject as NSDictionary
-            let imgs:NSDictionary = dict.objectForKey("")
-            self.images = dict.objectForKey("photos")
+            let key: NSString = NSString(string: "photo")
+            let imgs:NSDictionary = dict.objectForKey(key) as NSDictionary
+            let subKey:NSString = NSString(string: "photos")
+            self.images = imgs.objectForKey(subKey) as [Dictionary]
         }
 
     }
