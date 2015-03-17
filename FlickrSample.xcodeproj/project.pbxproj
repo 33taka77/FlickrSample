@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D48AAEE90F9A0721C4E3E8D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6B3B62258AAAB52F0C8DE3 /* libPods.a */; };
 		F9183F731AB83D3500946213 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9183F721AB83D3500946213 /* AppDelegate.swift */; };
 		F9183F761AB83D3500946213 /* FlickrSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9183F741AB83D3500946213 /* FlickrSample.xcdatamodeld */; };
 		F9183F781AB83D3500946213 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9183F771AB83D3500946213 /* ViewController.swift */; };
@@ -14,6 +15,7 @@
 		F9183F7D1AB83D3500946213 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9183F7C1AB83D3500946213 /* Images.xcassets */; };
 		F9183F801AB83D3500946213 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9183F7E1AB83D3500946213 /* LaunchScreen.xib */; };
 		F9183F8C1AB83D3600946213 /* FlickrSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9183F8B1AB83D3600946213 /* FlickrSampleTests.swift */; };
+		F9183F961AB84B9B00946213 /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = F9183F951AB84B9B00946213 /* podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7CDE2E098B899C4F8BB82DA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9110A921DA577858068854E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F9183F6D1AB83D3500946213 /* FlickrSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9183F711AB83D3500946213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9183F721AB83D3500946213 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +42,9 @@
 		F9183F851AB83D3600946213 /* FlickrSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9183F8A1AB83D3600946213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9183F8B1AB83D3600946213 /* FlickrSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSampleTests.swift; sourceTree = "<group>"; };
+		F9183F951AB84B9B00946213 /* podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = podfile; sourceTree = SOURCE_ROOT; };
+		F9183F971AB84D6500946213 /* FlickrSample-BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickrSample-BridgeHeader.h"; sourceTree = "<group>"; };
+		FE6B3B62258AAAB52F0C8DE3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D48AAEE90F9A0721C4E3E8D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +66,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4BB290BB96917D64C2410D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE6B3B62258AAAB52F0C8DE3 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6F3D25899488786EDBCA187 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CDE2E098B899C4F8BB82DA9 /* Pods.debug.xcconfig */,
+				9110A921DA577858068854E0 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F9183F641AB83D3500946213 = {
 			isa = PBXGroup;
 			children = (
 				F9183F6F1AB83D3500946213 /* FlickrSample */,
 				F9183F881AB83D3600946213 /* FlickrSampleTests */,
 				F9183F6E1AB83D3500946213 /* Products */,
+				F6F3D25899488786EDBCA187 /* Pods */,
+				E4BB290BB96917D64C2410D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +113,8 @@
 				F9183F7E1AB83D3500946213 /* LaunchScreen.xib */,
 				F9183F741AB83D3500946213 /* FlickrSample.xcdatamodeld */,
 				F9183F701AB83D3500946213 /* Supporting Files */,
+				F9183F951AB84B9B00946213 /* podfile */,
+				F9183F971AB84D6500946213 /* FlickrSample-BridgeHeader.h */,
 			);
 			path = FlickrSample;
 			sourceTree = "<group>";
@@ -122,9 +151,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9183F8F1AB83D3600946213 /* Build configuration list for PBXNativeTarget "FlickrSample" */;
 			buildPhases = (
+				40E48CEEC998AA019B79010B /* Check Pods Manifest.lock */,
 				F9183F691AB83D3500946213 /* Sources */,
 				F9183F6A1AB83D3500946213 /* Frameworks */,
 				F9183F6B1AB83D3500946213 /* Resources */,
+				B848F962DDBF3B102CE5F5EF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,10 +191,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "相澤 隆志";
+				ORGANIZATIONNAME = "&#30456;&#28580; &#38534;&#24535;";
 				TargetAttributes = {
 					F9183F6C1AB83D3500946213 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = B7Y86D9M44;
 					};
 					F9183F841AB83D3600946213 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -197,6 +229,7 @@
 			files = (
 				F9183F7B1AB83D3500946213 /* Main.storyboard in Resources */,
 				F9183F801AB83D3500946213 /* LaunchScreen.xib in Resources */,
+				F9183F961AB84B9B00946213 /* podfile in Resources */,
 				F9183F7D1AB83D3500946213 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +242,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40E48CEEC998AA019B79010B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B848F962DDBF3B102CE5F5EF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F9183F691AB83D3500946213 /* Sources */ = {
@@ -340,21 +406,25 @@
 		};
 		F9183F901AB83D3600946213 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CDE2E098B899C4F8BB82DA9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlickrSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlickrSample/FlickrSample-BridgeHeader.h";
 			};
 			name = Debug;
 		};
 		F9183F911AB83D3600946213 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9110A921DA577858068854E0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlickrSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlickrSample/FlickrSample-BridgeHeader.h";
 			};
 			name = Release;
 		};
@@ -411,6 +481,7 @@
 				F9183F911AB83D3600946213 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F9183F921AB83D3600946213 /* Build configuration list for PBXNativeTarget "FlickrSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +490,7 @@
 				F9183F941AB83D3600946213 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
