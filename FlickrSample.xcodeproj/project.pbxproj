@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D48AAEE90F9A0721C4E3E8D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6B3B62258AAAB52F0C8DE3 /* libPods.a */; };
+		81D6EC8C1AB9141400A30E43 /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6EC8B1AB9141400A30E43 /* ThumbnailCollectionViewCell.swift */; };
 		F9183F731AB83D3500946213 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9183F721AB83D3500946213 /* AppDelegate.swift */; };
 		F9183F761AB83D3500946213 /* FlickrSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9183F741AB83D3500946213 /* FlickrSample.xcdatamodeld */; };
 		F9183F781AB83D3500946213 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9183F771AB83D3500946213 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		7CDE2E098B899C4F8BB82DA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		81D6EC8B1AB9141400A30E43 /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		9110A921DA577858068854E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F9183F6D1AB83D3500946213 /* FlickrSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9183F711AB83D3500946213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				F9183F721AB83D3500946213 /* AppDelegate.swift */,
 				F9183F771AB83D3500946213 /* ViewController.swift */,
 				F9183F791AB83D3500946213 /* Main.storyboard */,
+				81D6EC8B1AB9141400A30E43 /* ThumbnailCollectionViewCell.swift */,
 				F9183F7C1AB83D3500946213 /* Images.xcassets */,
 				F9183F7E1AB83D3500946213 /* LaunchScreen.xib */,
 				F9183F741AB83D3500946213 /* FlickrSample.xcdatamodeld */,
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9183F781AB83D3500946213 /* ViewController.swift in Sources */,
+				81D6EC8C1AB9141400A30E43 /* ThumbnailCollectionViewCell.swift in Sources */,
 				F9183F761AB83D3500946213 /* FlickrSample.xcdatamodeld in Sources */,
 				F9183F731AB83D3500946213 /* AppDelegate.swift in Sources */,
 			);
