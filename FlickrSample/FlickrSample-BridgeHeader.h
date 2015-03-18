@@ -9,5 +9,6 @@
 #ifndef FlickrSample_FlickrSample_BridgeHeader_h
 #define FlickrSample_FlickrSample_BridgeHeader_h
 #import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 
 #endif
