@@ -19,6 +19,7 @@ class ViewController: UIViewController,UISearchBarDelegate{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         searchBar.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +30,7 @@ class ViewController: UIViewController,UISearchBarDelegate{
     func searchBarSearchButtonClicked(searchBarText:UISearchBar!) {
         searchBarText.resignFirstResponder()
         dearchText = searchBarText.text
+        self.fetchImages()
     }
     
     func fetchImages() {
