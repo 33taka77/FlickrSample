@@ -36,14 +36,16 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
     func fetchImages() {
         let manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
         let url :String = "https://api.flickr.com/services/rest/"
-        let parameters :Dictionary = [
-            "method"         : "flickr.interestingness.getList",
-            "api_key"        : "86997f23273f5a518b027e2c8c019b0f",
+        var parameters :Dictionary = [
+            //"method"         : "flickr.interestingness.getList",
+            "method"         : "flickr.photos.search",
+            "api_key"        : "685147fe878a39bf9b9853ae77b31e0b",
             "per_page"       : "99",
             "format"         : "json",
             "nojsoncallback" : "1",
-            "extras"         : "url_t,url_z",
+            "extras"         : "url_m,url_z",
         ]
+        parameters["text"] = self.dearchText
         let requestSuccess = {
             (operation:AFHTTPRequestOperation!, responseObject:AnyObject?) -> Void in
             let dict:NSDictionary = responseObject as NSDictionary
@@ -67,7 +69,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
         let cell :ThumbnailCollectionViewCell! = self.collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCell",forIndexPath: indexPath) as ThumbnailCollectionViewCell
         
         let item = self.images[indexPath.row] as NSDictionary
-        let photoUrlString:String = item["url_t"] as String
+        let photoUrlString:String = item["url_m"] as String
         let url : NSURL = NSURL(string: photoUrlString)!
         let request : NSURLRequest = NSURLRequest(URL: NSURL(string: photoUrlString)!)
         let imageRequestSuccess = {
