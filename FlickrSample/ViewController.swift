@@ -8,12 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    var dearchText:String = ""
+    var searchText:String = ""
     var images:[NSDictionary] = []
+    var prevSpace_x:CGFloat = 0
+    var prevSpace_y:CGFloat = 0
+    var currentTotalWidth:CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
 
     func searchBarSearchButtonClicked(searchBarText:UISearchBar!) {
         searchBarText.resignFirstResponder()
-        dearchText = searchBarText.text
+        self.searchText = searchBarText.text
         self.fetchImages()
     }
     
@@ -68,12 +71,23 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell :ThumbnailCollectionViewCell! = self.collectionView.dequeueReusableCellWithReuseIdentifier("ThumbnailCell",forIndexPath: indexPath) as ThumbnailCollectionViewCell
         
+        //cell.thumbnailImage.image = self.getImageDataInCell( cell, index:indexPath.row )!
+        
+        
         let item = self.images[indexPath.row] as NSDictionary
         let photoUrlString:String = item["url_m"] as String
         let url : NSURL = NSURL(string: photoUrlString)!
         let request : NSURLRequest = NSURLRequest(URL: NSURL(string: photoUrlString)!)
         let imageRequestSuccess = {
             (request : NSURLRequest!, response : NSHTTPURLResponse!, image : UIImage!) -> Void in
+            let size: CGSize = image.size
+            let x:CGFloat = size.width
+            let y:CGFloat = size.height
+            
+            print("Real size: width = \(x)")
+            println("Real size: height = \(y)")
+            
+
             cell.thumbnailImage.image = image;
             cell.thumbnailImage.alpha = 0
             UIView.animateWithDuration(0.2, animations: {
@@ -85,14 +99,121 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
             NSLog("imageRequrestFailure")
         }
         cell.thumbnailImage.setImageWithURLRequest(request, placeholderImage: nil, success: imageRequestSuccess, failure: imageRequestFailure)
+        
         return cell
     }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = self.images.count
         return count
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
+
+        let item = self.images[indexPath.row] as NSDictionary
+        let photoUrlString:String = item["url_m"] as String
+//        let url : NSURL = NSURL(string: photoUrlString)!
+        var imageData:UIImage? = nil
+        
+        let request:NSURLRequest! = NSURLRequest(URL: NSURL(string: photoUrlString)!)
+        let requestOpe:AFHTTPRequestOperation = AFHTTPRequestOperation(request: request)
+        
+        requestOpe.responseSerializer = AFImageResponseSerializer()
+        
+        
+        let requestSuccess = {
+            (operation:AFHTTPRequestOperation!, responseObject:AnyObject?) -> Void in
+            if let obj = responseObject as? NSData {
+                imageData = UIImage(data: obj)
+            }
+        }
+        
+        let requestFailure = {
+            (operation :AFHTTPRequestOperation!, error :NSError!) -> Void in
+            NSLog("requestFailure: \(error)")
+        }
+
+        requestOpe.setCompletionBlockWithSuccess(requestSuccess, failure: requestFailure)
+        requestOpe.start()
+        
+        
+        //let operation:AFImageRequestOperation = AFImageRequestOperation(request, imageProcessingBlock:nil, success:requestSuccess, failure:requestFailure)
+        
+        
+        //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:photourl]];
+        //AFImageRequestOperation *operation;
+        //operation = [AFImageRequestOperation imageRequestOperationWithRequest:request
+        //    imageProcessingBlock:nil
+        //    cacheName:nil
+        //    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            
+        //    }
+        //    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        //    NSLog(@"%@", [error localizedDescription]);
+        //    }];
+        
+        
+        
+        
+        /*
+        let serializer:AFImageResponseSerializer = AFImageResponseSerializer()
+        manager.responseSerializer = serializer
+         manager.GET(photoUrlString, parameters: nil, success: requestSuccess, failure: requestFailure)
+        */
+        
+        let img_widthStr = item["width_m"] as NSString
+        let img_heightStr = item["height_m"] as NSString
+        
+        println("width = "+img_widthStr + " : hight = "+img_heightStr)
+        
+        let img_width:CGFloat = CGFloat(img_widthStr.floatValue)
+        let img_height:CGFloat = CGFloat(img_heightStr.floatValue)
+
+        var x:CGFloat = 50
+        var y:CGFloat = 50
+        if img_width > img_height {
+            x = img_width > self.view.frame.size.width ? self.view.frame.size.width:img_width
+            y = img_height
+            if x > prevSpace_x {
+                x = prevSpace_x
+                y = prevSpace_x/img_width*img_height
+            }
+        }else{
+            x = 150.0
+            y = x/img_width*img_height
+        }
+        currentTotalWidth += x
+        if currentTotalWidth >= self.view.frame.size.width {
+            currentTotalWidth = 0
+        }
+        prevSpace_x = self.view.frame.size.width - currentTotalWidth
+        
+        //x = 320
+        //y = 160
+        x=img_width
+        y=img_height
+        return CGSizeMake(x, y)
+    }
+
+    func getImageDataInCell(cell:ThumbnailCollectionViewCell!, index: Int)->UIImage? {
+        var imageData :UIImage? = nil
+        let item = self.images[index] as NSDictionary
+        let photoUrlString:String = item["url_m"] as String
+        let url : NSURL = NSURL(string: photoUrlString)!
+        let request : NSURLRequest = NSURLRequest(URL: NSURL(string: photoUrlString)!)
+        let imageRequestSuccess = {
+            (request : NSURLRequest!, response : NSHTTPURLResponse!, image : UIImage!) -> Void in
+            imageData! = image;
+        }
+        let imageRequestFailure = {
+            (request : NSURLRequest!, response : NSHTTPURLResponse!, error : NSError!) -> Void in
+            NSLog("imageRequrestFailure")
+        }
+        cell.thumbnailImage.setImageWithURLRequest(request, placeholderImage: nil, success: imageRequestSuccess, failure: imageRequestFailure)
+
+        return imageData
+    }
     
 }
 
