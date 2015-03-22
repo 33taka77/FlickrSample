@@ -22,7 +22,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         searchBar.delegate = self
-        
+        prevSpace_x = self.view.frame.size.width
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +48,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
             "nojsoncallback" : "1",
             "extras"         : "url_m,url_z",
         ]
-        parameters["text"] = self.dearchText
+        parameters["text"] = self.searchText
         let requestSuccess = {
             (operation:AFHTTPRequestOperation!, responseObject:AnyObject?) -> Void in
             let dict:NSDictionary = responseObject as NSDictionary
@@ -90,6 +90,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
 
             cell.thumbnailImage.image = image;
             cell.thumbnailImage.alpha = 0
+            
             UIView.animateWithDuration(0.2, animations: {
                 cell.thumbnailImage.alpha = 1.0
             })
@@ -109,10 +110,65 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
 
+
+        var q_global: dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        var q_main: dispatch_queue_t  = dispatch_get_main_queue();
+        
+        var flag = false
+
+        dispatch_async(q_global,{
+            let manager:AFHTTPRequestOperationManager = AFHTTPRequestOperationManager()
+            let item:Dictionary = self.images[indexPath.row]
+            
+            let url :String = "https://api.flickr.com/services/rest/"
+            var parameters :Dictionary = [
+                //"method"         : "flickr.interestingness.getList",
+                "method"         : "flickr.photos.getSizes",
+                "api_key"        : "685147fe878a39bf9b9853ae77b31e0b",
+                "format"         : "json",
+                "nojsoncallback" : "1",
+            ]
+            let photoId:String? = item["id"] as? String
+            parameters["photo_id"] = photoId
+            
+            let requestSuccess = {
+                (operation:AFHTTPRequestOperation!, responseObject:AnyObject?) -> Void in
+                let dict:NSDictionary = responseObject as NSDictionary
+                let key: NSString = NSString(string: "sizes")
+                let sizes:NSDictionary? = dict.objectForKey(key) as? NSDictionary
+                let subKey:NSString = NSString(string: "size")
+                let array:[NSDictionary] = sizes!.objectForKey(subKey) as [NSDictionary]
+                for element:NSDictionary in array {
+                    if element["label"] as String == "Medium" {
+                        let width: String? = element["width"] as? String
+                        let height: String? = element["height"] as? String
+                        println("image size: width = \(width) height = \(height)")
+                    }
+                }
+                flag = true
+            }
+            
+            let requestFailure = {
+                (operation :AFHTTPRequestOperation!, error :NSError!) -> Void in
+                NSLog("requestFailure: \(error)")
+            }
+            manager.GET(url, parameters: parameters, success: requestSuccess, failure: requestFailure)
+        })
+        /*
+        while true {
+            if flag == true {
+                flag = false
+                break
+            }
+        }
+        */
+
+/*
         let item = self.images[indexPath.row] as NSDictionary
         let photoUrlString:String = item["url_m"] as String
+
+
 //        let url : NSURL = NSURL(string: photoUrlString)!
         var imageData:UIImage? = nil
         
@@ -136,7 +192,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
 
         requestOpe.setCompletionBlockWithSuccess(requestSuccess, failure: requestFailure)
         requestOpe.start()
-        
+*/
         
         //let operation:AFImageRequestOperation = AFImageRequestOperation(request, imageProcessingBlock:nil, success:requestSuccess, failure:requestFailure)
         
@@ -162,6 +218,7 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
          manager.GET(photoUrlString, parameters: nil, success: requestSuccess, failure: requestFailure)
         */
         
+        /*
         let img_widthStr = item["width_m"] as NSString
         let img_heightStr = item["height_m"] as NSString
         
@@ -169,7 +226,10 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
         
         let img_width:CGFloat = CGFloat(img_widthStr.floatValue)
         let img_height:CGFloat = CGFloat(img_heightStr.floatValue)
-
+        */
+        
+        
+        /*
         var x:CGFloat = 50
         var y:CGFloat = 50
         if img_width > img_height {
@@ -193,6 +253,9 @@ class ViewController: UIViewController,UISearchBarDelegate, UICollectionViewDele
         //y = 160
         x=img_width
         y=img_height
+        */
+        let x:CGFloat = 320
+        let y:CGFloat = 160
         return CGSizeMake(x, y)
     }
 
